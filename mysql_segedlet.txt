@@ -1,0 +1,60 @@
+mysqld --console --initialize --init-file=c:\\Temp_mysql\\mysql-init.txt
+mysqld --console --port 13306
+
+mysql -P 13306 -u root -p
+
+----------
+
+root:
+
+CREATE DATABASE tyre;
+CREATE USER 'tyre'@'localhost' IDENTIFIED WITH mysql_native_password BY 'tyre';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON tyre.* TO 'tyre'@'localhost';
+
+----------
+
+tire:
+
+CREATE TABLE `tyre`.`tire` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `category_id` INT NOT NULL,
+  `meret` VARCHAR(45) NULL,
+  `marka` VARCHAR(45) NULL,
+  `tipus` VARCHAR(45) NULL,
+  `keszlet` INT NOT NULL,
+  PRIMARY KEY (`id`));
+  
+  CREATE TABLE `tyre`.`tire_category` (
+  `id` INT NOT NULL,
+  `evszak` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+  
+ALTER TABLE `tyre`.`tire_category` 
+CHANGE COLUMN `id` `id` INT NOT NULL AUTO_INCREMENT ;
+
+INSERT INTO `tyre`.`tire_category` (`id`,`evszak`) VALUES (-1,'Nyári');
+INSERT INTO `tyre`.`tire_category` (`id`,`evszak`) VALUES (-2,'Téli');
+INSERT INTO `tyre`.`tire_category` (`id`,`evszak`) VALUES (-3,'Négyévszakos');
+
+INSERT INTO `tyre`.`tire` (`id`, `category_id`, `meret`, `marka`, `tipus`, `keszlet`) VALUES ('-10', '-1', '195/60 R15', 'Hankook', 'Ventus Prime', '24');
+INSERT INTO `tyre`.`tire` (`id`, `category_id`, `meret`, `marka`, `tipus`, `keszlet`) VALUES ('-9', '-1', '205/40 R17', 'Toyo', 'Proxes T1R', '4');
+INSERT INTO `tyre`.`tire` (`id`, `category_id`,`meret`, `marka`, `tipus`, `keszlet`) VALUES ('-8', '-1', '165/65 R14', 'Nankang', 'Econex NA-1', '12');
+INSERT INTO `tyre`.`tire` (`id`, `category_id`, `meret`, `marka`, `tipus`, `keszlet`) VALUES ('-7', '-1', '245/40 R18', 'Michelin', 'Pilot Sport', '8');
+INSERT INTO `tyre`.`tire` (`id`, `category_id`, `meret`, `marka`, `tipus`, `keszlet`) VALUES ('-6', '-1', '205/55 R16', 'Bridgestone', 'Turanza t005', '16');
+INSERT INTO `tyre`.`tire` (`id`, `category_id`, `meret`, `marka`, `tipus`, `keszlet`) VALUES ('-5', '-1', '215/55 R16', 'Uniroyal', 'Rainsport 5', '12');
+
+
+mytable:
+
+CREATE TABLE `tyre`.`mytable` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `age` int NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`));
+
+INSERT INTO `tyre`.`mytable` (`id`, `firstname`, `lastname`, `age`, `password`, `username`) VALUES (1, 'Teszt', 'Elek', '1', '123', 'testuser');
+INSERT INTO `tyre`.`mytable` (`id`, `firstname`, `lastname`, `age`, `password`, `username`) VALUES (2, 'Teszt', 'Elemer', '2', '123', 'testadmin');
